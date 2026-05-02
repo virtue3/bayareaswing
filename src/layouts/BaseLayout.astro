@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "A friendly guide to swing dance lessons and socials in the SF Bay Area — for balboa, lindy hop, and shag dancers just getting started." } = Astro.props;
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/learn", label: "Find Lessons" },
+  { href: "/contribute", label: "Add a Lesson" },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <header class="border-b border-burgundy/20 bg-cream-dark/40">
+      <div class="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-4 px-6 py-5">
+        <a href="/" class="font-display text-2xl font-bold tracking-tight text-burgundy no-underline">
+          bayareaswing
+        </a>
+        <nav class="flex flex-wrap gap-6 text-sm uppercase tracking-widest">
+          {nav.map((item) => {
+            const itemPath = item.href.replace(/\/$/, "") || "/";
+            const isActive = itemPath === pathname;
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  "no-underline",
+                  isActive ? "text-brass-dark font-semibold" : "text-charcoal hover:text-burgundy",
+                ]}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-12">
+      <slot />
+    </main>
+
+    <footer class="border-t border-burgundy/20 bg-cream-dark/40">
+      <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-charcoal/70">
+        <p>
+          A community-maintained guide. Found a missing or outdated lesson?
+          {" "}
+          <a href="/contribute">Send us a pull request.</a>
+        </p>
+        <p class="mt-2">
+          Source on{" "}
+          <a href="https://github.com/virtue3/bayareaswing" rel="noopener">GitHub</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  name: string;
+  style: "balboa" | "lindy" | "shag";
+  day: string;
+  time: string;
+  venue: string;
+  address: string;
+  neighborhood?: string;
+  level: string;
+  instructor?: string;
+  cost?: string;
+  contact?: string;
+  notes?: string;
+}
+
+const props = Astro.props;
+const dayLabel = props.day.charAt(0).toUpperCase() + props.day.slice(1);
+const styleLabel = {
+  balboa: "Balboa",
+  lindy: "Lindy Hop",
+  shag: "Collegiate Shag",
+}[props.style];
+---
+<article class="group flex flex-col gap-3 border border-burgundy/15 bg-cream-dark/30 p-6 shadow-sm">
+  <div class="flex flex-wrap items-baseline justify-between gap-2">
+    <h3 class="text-xl font-bold">{props.name}</h3>
+    <span class="font-display text-sm uppercase tracking-widest text-brass-dark">
+      {styleLabel}
+    </span>
+  </div>
+
+  <p class="text-sm font-medium text-charcoal/80">
+    {dayLabel}s · {props.time} · <span class="capitalize">{props.level}</span>
+  </p>
+
+  <p class="text-sm">
+    <strong class="font-semibold">{props.venue}</strong>
+    {props.neighborhood && <span class="text-charcoal/70"> — {props.neighborhood}</span>}
+    <br />
+    <span class="text-charcoal/70">{props.address}</span>
+  </p>
+
+  {props.instructor && (
+    <p class="text-sm text-charcoal/80">Taught by {props.instructor}</p>
+  )}
+
+  {props.cost && (
+    <p class="text-sm text-charcoal/80">{props.cost}</p>
+  )}
+
+  {props.notes && (
+    <p class="text-sm text-charcoal/70 italic">{props.notes}</p>
+  )}
+
+  {props.contact && (
+    <p class="text-sm">
+      <a href={props.contact} rel="noopener">More info →</a>
+    </p>
+  )}
+</article>
