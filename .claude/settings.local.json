@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(npm uninstall *)",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(grep -oE \"Woodchopper|Cat.{1,5}s Corner|&#x27;s Corner|&#39;\" /tmp/index.html)",
+      "Bash(grep -oE \"Woodchopper[^<]{0,30}\" /tmp/index.html)"
     ]
   }
 }

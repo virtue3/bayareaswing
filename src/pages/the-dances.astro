@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Dance {
+  id: string;
+  number: string;
+  name: string;
+  origin: string;
+  quote: string;
+  traits: string[];
+  story: string;
+  feel: string;
+  characteristics: string[];
+  learning: string;
+  callout: string;
+  classesLinkLabel: string;
+}
+
+const dances: Dance[] = [
+  {
+    id: "lindy",
+    number: "01",
+    name: "Lindy Hop",
+    origin: "Harlem, New York · 1920s–30s",
+    quote: "A social jazz dance built on swing rhythm, improvisation, and partner connection.",
+    traits: ["Improvisational", "Partner Dance", "6 & 8-Count", "Swing Jazz"],
+    story:
+      "Lindy Hop developed in Harlem in the late 1920s and 1930s, with the Savoy Ballroom becoming its most famous home. It grew from earlier Black American social dances, including Charleston and breakaway, and evolved alongside swing-era jazz.",
+    feel:
+      "Lindy Hop has a grounded, elastic feel. Partners move between open and closed positions, often using swing outs, turns, Charleston, and improvised rhythms. The dance can be relaxed or athletic depending on the music and the dancers.",
+    characteristics: [
+      "Commonly uses both 6-count and 8-count patterns",
+      "Often moves between open and closed partner positions",
+      "Includes swing outs, circles, Charleston, turns, and footwork variations",
+      "Emphasizes rhythm, musicality, and improvisation",
+    ],
+    learning:
+      "Lindy Hop is the most common entry point at Bay Area swing events. Woodchopper's Ball and Cat's Corner SF include a beginner drop-in lesson before social dancing, and the San Francisco Lindy Hop Facebook group shares local dance updates.",
+    callout:
+      'Woodchopper\'s Ball (Tue) and Cat\'s Corner SF (Wed) both offer beginner Lindy drop-in lessons before social dancing — no sign-up needed. Join the <a href="https://www.facebook.com/groups/sflindyhop/" class="text-red hover:text-cream transition-colors">San Francisco Lindy Hop Facebook group</a> for local updates.',
+    classesLinkLabel: "Find Lindy classes →",
+  },
+  {
+    id: "balboa",
+    number: "02",
+    name: "Balboa",
+    origin: "Southern California · 1920s–30s",
+    quote: "A compact swing dance known for subtle connection and precise footwork.",
+    traits: ["Close Embrace", "Compact", "Pure Bal & Bal-Swing", "Fast Swing"],
+    story:
+      "Balboa developed in Southern California dance halls in the 1920s and 1930s. Its compact movement made it practical on crowded floors, and dancers built rich rhythmic variation within a close partner connection.",
+    feel:
+      "Balboa feels close, efficient, and rhythmically detailed. In Pure Bal, partners stay in closed position; Bal-Swing adds turns, throwouts, and more open shapes. Because the steps are small, Balboa works well at faster swing tempos.",
+    characteristics: [
+      "Pure Bal stays in a close, compact hold",
+      "Bal-Swing adds turns, throwouts, and open variations",
+      "Lead-follow is subtle and often felt through the body connection",
+      "Footwork can be simple on the surface and highly varied underneath",
+    ],
+    learning:
+      "Balboa is often taught in dedicated class series rather than one-off beginner drop-ins. Woodchopper's Ball includes Balboa in its rotating 7–9pm class offerings, and the SF Balboa Facebook group shares more places to dance.",
+    callout:
+      'Woodchopper\'s Ball includes Balboa in its Tuesday 7–9pm class rotation. Join the <a href="https://www.facebook.com/groups/balboa" class="text-red hover:text-cream transition-colors">SF Balboa Facebook group</a> to learn about more Balboa dances.',
+    classesLinkLabel: "Find Balboa classes →",
+  },
+  {
+    id: "shag",
+    number: "03",
+    name: "Collegiate Shag",
+    origin: "United States · 1930s swing era",
+    quote: "An energetic swing dance with a buoyant rhythm and compact footwork.",
+    traits: ["Energetic", "Closed & Open", "Commonly 6-Count", "Fast Swing"],
+    story:
+      "Collegiate Shag was popular among young dancers in the United States during the 1930s swing era. The name covers a family of related shag styles, and today it usually refers to the vintage swing dance rather than Carolina Shag.",
+    feel:
+      "Collegiate Shag is buoyant and rhythmic, often using a quick-slow, quick-slow feel or a double-hop basic. It is frequently danced to faster swing music, but the look and timing vary by style, teacher, and region.",
+    characteristics: [
+      "Often taught with a 6-count basic, with variations across styles",
+      "Can use closed, open, and side-by-side positions",
+      "Known for buoyant pulse and compact, energetic footwork",
+      "Works especially well with uptempo swing music",
+    ],
+    learning:
+      "Shag is less common than Lindy Hop at weekly Bay Area events, but workshops and short class series appear regularly. The SF Shag Facebook group is a good place to learn where people are dancing Shag.",
+    callout:
+      'Check event calendars and instructor announcements for occasional Shag workshops or short class series. Join the <a href="https://www.facebook.com/groups/SFShag" class="text-red hover:text-cream transition-colors">SF Shag Facebook group</a> to find more Shag opportunities.',
+    classesLinkLabel: "Find Shag classes →",
+  },
+];
+
+const tableRows: { label: string; values: [string, string, string]; highlightCol?: 0 | 1 | 2 }[] = [
+  { label: "Roots", values: ["Harlem, NYC", "Southern California", "1930s US swing era"] },
+  { label: "Timing", values: ["6 & 8-count patterns", "Compact 8-count basics", "Often 6-count basics"] },
+  {
+    label: "Hold",
+    values: ["Open & closed", "Close & compact", "Closed, open & side-by-side"],
+  },
+  { label: "Music", values: ["Swing jazz", "Often faster swing", "Often uptempo swing"] },
+  {
+    label: "Start with?",
+    values: ["Common first dance", "Beginner-friendly", "Beginner-friendly"],
+    highlightCol: 0,
+  },
+];
+---
+<BaseLayout title="The Dances — Bay Area Swing Dancing" description="Learn about Lindy Hop, Balboa, and Collegiate Shag — the vintage swing dances of the Bay Area scene.">
+  <div class="pt-32 pb-12 px-6 md:px-12 max-w-5xl mx-auto">
+    <p class="text-red text-xs tracking-widest uppercase mb-3">Vintage Partner Dances</p>
+    <h1 class="text-cream text-5xl md:text-7xl font-bold tracking-tight leading-none mb-4">The Dances</h1>
+    <p class="text-cream-dim text-sm md:text-base leading-relaxed max-w-lg">Three dances, one era. Here's what makes each distinct — and why dancers end up loving all of them.</p>
+  </div>
+
+  <div class="px-6 md:px-12 pb-12 max-w-5xl mx-auto">
+    <div class="flex gap-3 flex-wrap">
+      {dances.map((d) => (
+        <a href={`#${d.id}`} class="border border-neutral-700 text-cream-dim hover:text-cream hover:border-neutral-500 text-xs tracking-widest uppercase px-4 py-2 no-underline transition-colors">
+          {d.number} {d.name}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="border-t border-neutral-800 mx-6 md:mx-12"></div>
+
+  {dances.map((d, i) => (
+    <>
+      <section id={d.id} class="px-6 md:px-12 py-16 max-w-5xl mx-auto scroll-mt-20">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+          <div class="md:sticky md:top-24 self-start">
+            <p class="text-red text-xs tracking-widest uppercase mb-2">{d.number}</p>
+            <h2 class="text-cream text-4xl md:text-5xl font-bold leading-tight mb-3">{d.name}</h2>
+            <p class="text-neutral-500 text-xs tracking-wider uppercase mb-6">{d.origin}</p>
+            <blockquote class="border-l-2 border-red pl-4 text-cream-dim text-sm italic leading-relaxed mb-6">
+              "{d.quote}"
+            </blockquote>
+            <div class="flex flex-wrap gap-2 mb-6">
+              {d.traits.map((trait, idx) => (
+                <span class:list={[
+                  "text-xs tracking-wider uppercase px-2.5 py-1 border",
+                  idx === 0
+                    ? "text-red border-red"
+                    : "text-neutral-400 border-neutral-700",
+                ]}>
+                  {trait}
+                </span>
+              ))}
+            </div>
+            <a href="/find-classes" class="text-xs tracking-widest uppercase text-neutral-400 hover:text-cream no-underline transition-colors">{d.classesLinkLabel}</a>
+          </div>
+
+          <div class="space-y-6 text-sm text-cream-dim leading-relaxed">
+            <div>
+              <h3 class="text-cream text-xs tracking-widest uppercase mb-3">{i === 0 ? "Harlem Roots" : i === 1 ? "Southern California Roots" : "Swing Era Context"}</h3>
+              <p>{d.story}</p>
+            </div>
+            <div>
+              <h3 class="text-cream text-xs tracking-widest uppercase mb-3">What It Feels Like</h3>
+              <p>{d.feel}</p>
+            </div>
+            <div>
+              <h3 class="text-cream text-xs tracking-widest uppercase mb-3">Key Characteristics</h3>
+              <ul class="space-y-1.5">
+                {d.characteristics.map((c) => (
+                  <li class="flex gap-2"><span class="text-red flex-shrink-0">—</span><span>{c}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-cream text-xs tracking-widest uppercase mb-3">Learning It</h3>
+              <p>{d.learning}</p>
+            </div>
+            <div class="border border-neutral-800 p-5">
+              <p class="text-xs tracking-widest uppercase text-neutral-500 mb-2">Try it this week</p>
+              <p class="text-cream text-sm mb-3" set:html={d.callout} />
+              <a href="/find-classes" class="bg-red text-cream text-xs tracking-widest uppercase px-4 py-2 no-underline hover:bg-transparent hover:text-red border border-red transition-colors inline-block">Find Classes →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="border-t border-neutral-800 mx-6 md:mx-12"></div>
+    </>
+  ))}
+
+  <section class="px-6 md:px-12 py-16 max-w-5xl mx-auto">
+    <p class="text-neutral-500 text-xs tracking-widest uppercase mb-8">At a Glance</p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-neutral-800">
+            <th class="text-left py-3 pr-6 text-neutral-500 text-xs tracking-wider uppercase font-normal w-32"></th>
+            {dances.map((d) => (
+              <th class="text-left py-3 pr-6 text-cream font-medium last:pr-0">{d.name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-800">
+          {tableRows.map((row) => (
+            <tr>
+              <td class="py-3 pr-6 text-neutral-500 text-xs tracking-wider uppercase">{row.label}</td>
+              {row.values.map((value, col) => (
+                <td class:list={[
+                  "py-3 pr-6 last:pr-0",
+                  row.highlightCol === col ? "text-red font-medium" : "text-cream-dim",
+                ]}>
+                  {value}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-8">
+      <a href="/find-classes" class="bg-red text-cream text-xs tracking-widest uppercase px-6 py-3 no-underline hover:bg-transparent hover:text-red border border-red transition-colors inline-block">Find Weekly Classes →</a>
+    </div>
+  </section>
+</BaseLayout>

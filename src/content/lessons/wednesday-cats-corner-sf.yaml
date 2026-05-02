@@ -1,0 +1,31 @@
+name: "Cat's Corner SF"
+day: wednesday
+location: "435 Broadway · North Beach, SF"
+addressLine1: "Mabuhay Gardens · 435 Broadway St"
+addressLine2: "North Beach, San Francisco"
+url: "https://www.catscornersf.com/"
+styles: [lindy]
+description: "Two rooms of classes, rotating live bands, and a full bar. SF's iconic Wednesday night swing party in a historic North Beach venue."
+links:
+  - label: "Register for classes"
+    url: "https://register.catscornersf.com"
+  - label: "Directions & parking"
+    url: "https://www.catscornersf.com/venue-435-broadway"
+schedule:
+  - time: "7:00–8:00 pm"
+    desc: "Intermediate Lindy Hop (main ballroom, monthly series)"
+  - time: "8:00–9:00 pm"
+    desc: "Beginning Lindy Hop (main ballroom, monthly series)"
+  - time: "8:00–9:00 pm"
+    desc: "Advanced topics (side room, monthly series)"
+  - time: "9:00–9:30 pm"
+    desc: "Beginning swing drop-in (no sign-up)"
+  - time: "9:00–11:30 pm"
+    desc: "Live music dance party"
+cost:
+  - label: "General admission"
+    value: "$15 (includes 9pm drop-in)"
+  - label: "Early / late"
+    value: "$10 before 8:30pm or after 10pm; $5 after 11pm"
+  - label: "Monthly classes"
+    value: "See website for current pricing"

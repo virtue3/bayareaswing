@@ -1,0 +1,183 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const dayOrder = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+] as const;
+
+const dayLabel = (d: (typeof dayOrder)[number]) =>
+  d.charAt(0).toUpperCase() + d.slice(1);
+
+const styleLabel: Record<"lindy" | "balboa" | "shag", string> = {
+  lindy: "Lindy Hop",
+  balboa: "Balboa",
+  shag: "Collegiate Shag",
+};
+
+const venues = (await getCollection("lessons"))
+  .map((entry) => entry.data)
+  .sort((a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day));
+
+const presentDays = Array.from(new Set(venues.map((v) => v.day)));
+
+const tips = [
+  {
+    n: "01",
+    h: "Show up before the lesson",
+    p: "All venues offer a beginner drop-in lesson before social dancing. It's free with admission and the single best way to get started.",
+  },
+  {
+    n: "02",
+    h: "Come without a partner",
+    p: "Partners rotate in class and on the social floor. Coming solo is completely normal — it's how most experienced dancers prefer it.",
+  },
+  {
+    n: "03",
+    h: "Wear leather or suede soles",
+    p: "Rubber soles grip the floor and can torque your knees. Leather or suede-soled shoes let you pivot safely. Sneakers are fine to start.",
+  },
+];
+---
+<BaseLayout title="Find Classes — Bay Area Swing Dancing" description="Weekly swing dance classes and social dances in the San Francisco Bay Area.">
+  <div class="pt-32 pb-12 px-6 md:px-12 max-w-5xl mx-auto">
+    <p class="text-red text-xs tracking-widest uppercase mb-3">Weekly Schedule</p>
+    <h1 class="text-cream text-5xl md:text-7xl font-bold tracking-tight leading-none mb-4">Find Classes</h1>
+    <p class="text-cream-dim text-sm md:text-base leading-relaxed max-w-lg">Four nights a week across the Bay. Beginner lessons included with most events — no sign-up, no partner needed.</p>
+  </div>
+
+  <div class="px-6 md:px-12 pb-10 max-w-5xl mx-auto">
+    <p class="text-neutral-500 text-xs leading-relaxed border-l-2 border-neutral-700 pl-4">Always verify schedules and pricing on each venue's website before attending — this page reflects current information but venues may update details.</p>
+  </div>
+
+  <div class="px-6 md:px-12 max-w-5xl mx-auto border-b border-neutral-800 mb-0">
+    <div class="flex gap-0 flex-wrap -mb-px">
+      <button
+        class="filter-tab border-b-2 border-red text-cream text-xs tracking-widest uppercase px-4 py-3 bg-transparent border-t-0 border-l-0 border-r-0 cursor-pointer transition-colors"
+        data-filter="all"
+      >All</button>
+      {presentDays.map((day) => (
+        <button
+          class="filter-tab border-b-2 border-transparent text-neutral-500 hover:text-cream text-xs tracking-widest uppercase px-4 py-3 bg-transparent border-t-0 border-l-0 border-r-0 cursor-pointer transition-colors"
+          data-filter={day}
+        >{dayLabel(day)}</button>
+      ))}
+    </div>
+  </div>
+
+  <div id="venueList" class="px-6 md:px-12 max-w-5xl mx-auto divide-y divide-neutral-800">
+    {venues.map((v) => (
+      <article class="venue-card py-12" data-day={v.day}>
+        <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+          <div>
+            <p class="text-red text-xs tracking-widest uppercase mb-2">{dayLabel(v.day)}</p>
+            <h2 class="text-cream text-2xl font-bold mb-1">{v.name}</h2>
+            <p class="text-neutral-500 text-xs mb-4">
+              {v.addressLine1 ? (
+                <>
+                  {v.addressLine1}<br />{v.addressLine2}
+                </>
+              ) : (
+                v.location
+              )}
+            </p>
+            {v.styles.length > 0 && (
+              <div class="flex flex-wrap gap-2 mb-5">
+                {v.styles.map((s) => (
+                  <span class="text-red border border-red text-xs tracking-wider uppercase px-2 py-0.5">
+                    {styleLabel[s]}
+                  </span>
+                ))}
+              </div>
+            )}
+            {v.description && (
+              <p class="text-cream-dim text-xs leading-relaxed mb-5">{v.description}</p>
+            )}
+            <div class="flex flex-col gap-2">
+              <a href={v.url} target="_blank" rel="noopener" class="text-cream text-xs tracking-widest uppercase no-underline hover:text-red transition-colors">
+                {new URL(v.url).hostname.replace(/^www\./, "")} →
+              </a>
+              {v.links.map((link) => (
+                <a href={link.url} target="_blank" rel="noopener" class="text-neutral-500 text-xs no-underline hover:text-cream transition-colors">
+                  {link.label} →
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p class="text-neutral-500 text-xs tracking-widest uppercase mb-4">Schedule</p>
+            <div class="space-y-3 text-sm">
+              {v.schedule.map((row) => (
+                <div class="grid grid-cols-2 gap-2">
+                  <span class="text-neutral-500 text-xs tabular-nums">{row.time}</span>
+                  <span class="text-cream-dim text-xs">{row.desc}</span>
+                </div>
+              ))}
+            </div>
+            {v.scheduleNote && (
+              <p class="text-neutral-600 text-xs mt-4">{v.scheduleNote}</p>
+            )}
+          </div>
+
+          <div>
+            <p class="text-neutral-500 text-xs tracking-widest uppercase mb-4">Cost</p>
+            {v.cost.length > 0 ? (
+              <div class="space-y-3">
+                {v.cost.map((c) => (
+                  <div>
+                    <p class="text-neutral-500 text-xs mb-0.5">{c.label}</p>
+                    <p class="text-cream text-sm">{c.value}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              v.costNote && <p class="text-cream-dim text-sm">{v.costNote}</p>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="border-t border-neutral-800 mx-6 md:mx-12"></div>
+
+  <section class="px-6 md:px-12 py-16 max-w-5xl mx-auto">
+    <p class="text-neutral-500 text-xs tracking-widest uppercase mb-8">First Time?</p>
+    <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+      {tips.map((t) => (
+        <div>
+          <p class="text-red text-xs tracking-widest uppercase mb-3">{t.n}</p>
+          <h3 class="text-cream text-sm font-medium mb-2">{t.h}</h3>
+          <p class="text-cream-dim text-sm leading-relaxed">{t.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    const tabs = document.querySelectorAll<HTMLButtonElement>(".filter-tab");
+    const cards = document.querySelectorAll<HTMLElement>(".venue-card");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => {
+          t.classList.remove("border-red", "text-cream");
+          t.classList.add("border-transparent", "text-neutral-500");
+        });
+        tab.classList.remove("border-transparent", "text-neutral-500");
+        tab.classList.add("border-red", "text-cream");
+        const filter = tab.dataset.filter;
+        cards.forEach((card) => {
+          card.style.display =
+            filter === "all" || card.dataset.day === filter ? "" : "none";
+        });
+      });
+    });
+  </script>
+</BaseLayout>

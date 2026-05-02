@@ -1,0 +1,13 @@
+name: "Wednesday Night Hop"
+day: wednesday
+location: "Palo Alto · South Bay"
+url: "https://wednesdaynighthop.com/"
+styles: [lindy]
+description: "The South Bay's weekly swing night, bringing Lindy Hop to the Peninsula every Wednesday."
+schedule:
+  - time: "Early evening"
+    desc: "Beginner & intermediate classes"
+  - time: "Later evening"
+    desc: "Social dancing with DJ"
+scheduleNote: "See website for exact times"
+costNote: "See website for current admission"

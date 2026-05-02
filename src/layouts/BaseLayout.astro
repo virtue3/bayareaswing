@@ -6,66 +6,118 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "A friendly guide to swing dance lessons and socials in the SF Bay Area — for balboa, lindy hop, and shag dancers just getting started." } = Astro.props;
+const {
+  title,
+  description = "Your guide to vintage swing dancing in the San Francisco Bay Area. Discover Lindy Hop, Balboa, and Shag, and find weekly lessons near you.",
+} = Astro.props;
 
-const nav = [
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const navItems = [
   { href: "/", label: "Home" },
-  { href: "/learn", label: "Find Lessons" },
-  { href: "/contribute", label: "Add a Lesson" },
+  { href: "/the-dances", label: "The Dances" },
+  { href: "/find-classes", label: "Find Classes" },
+  { href: "/#faq", label: "FAQ" },
 ];
-
-const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => {
+  if (href.startsWith("/#")) return false;
+  return href === path;
+};
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg-neutral-950 text-neutral-100">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
   </head>
-  <body class="flex min-h-screen flex-col">
-    <header class="border-b border-burgundy/20 bg-cream-dark/40">
-      <div class="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-4 px-6 py-5">
-        <a href="/" class="font-display text-2xl font-bold tracking-tight text-burgundy no-underline">
-          bayareaswing
-        </a>
-        <nav class="flex flex-wrap gap-6 text-sm uppercase tracking-widest">
-          {nav.map((item) => {
-            const itemPath = item.href.replace(/\/$/, "") || "/";
-            const isActive = itemPath === pathname;
-            return (
-              <a
-                href={item.href}
-                class:list={[
-                  "no-underline",
-                  isActive ? "text-brass-dark font-semibold" : "text-charcoal hover:text-burgundy",
-                ]}
-              >
-                {item.label}
-              </a>
-            );
-          })}
-        </nav>
-      </div>
-    </header>
+  <body class="bg-neutral-950 text-neutral-100 antialiased">
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 transition-colors duration-300">
+      <a href="/" class="flex items-center gap-3 no-underline">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M10 19 L10 10 L20 7.5 L20 13" stroke="#c8422a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <ellipse cx="8.5" cy="19.5" rx="2" ry="1.4" fill="#c8422a"/>
+          <ellipse cx="18.5" cy="13.5" rx="2" ry="1.4" fill="#c8422a"/>
+        </svg>
+        <span class="text-cream text-sm font-medium tracking-wide">Bay Area Swing</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 list-none">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                "text-xs tracking-widest uppercase no-underline transition-colors",
+                isActive(item.href)
+                  ? "text-cream border-b border-red pb-px"
+                  : "text-neutral-400 hover:text-cream",
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 bg-transparent border-0 cursor-pointer p-1" aria-label="Open menu">
+        <span class="block w-5 h-px bg-cream transition-all duration-200"></span>
+        <span class="block w-5 h-px bg-cream transition-all duration-200"></span>
+        <span class="block w-5 h-px bg-cream transition-all duration-200"></span>
+      </button>
+    </nav>
 
-    <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-12">
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-neutral-950 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300">
+      <a href="/" class="text-cream text-3xl no-underline" data-close-menu>Home</a>
+      <a href="/the-dances" class="text-cream text-3xl no-underline" data-close-menu>The Dances</a>
+      <a href="/find-classes" class="text-cream text-3xl no-underline" data-close-menu>Find Classes</a>
+      <a href="/#faq" class="text-cream text-3xl no-underline" data-close-menu>FAQ</a>
+    </div>
+
+    <main>
       <slot />
     </main>
 
-    <footer class="border-t border-burgundy/20 bg-cream-dark/40">
-      <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-charcoal/70">
-        <p>
-          A community-maintained guide. Found a missing or outdated lesson?
-          {" "}
-          <a href="/contribute">Send us a pull request.</a>
-        </p>
-        <p class="mt-2">
-          Source on{" "}
-          <a href="https://github.com/virtue3/bayareaswing" rel="noopener">GitHub</a>.
-        </p>
+    <footer class="border-t border-neutral-800 px-6 md:px-12 py-10 mt-4">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-4 text-neutral-500 text-xs">
+        <p>Bay Area Swing Dancing — community resource for vintage swing in the SF Bay Area</p>
+        <div class="flex gap-6">
+          <a href="/" class="text-neutral-500 hover:text-cream no-underline transition-colors">Home</a>
+          <a href="/the-dances" class="text-neutral-500 hover:text-cream no-underline transition-colors">The Dances</a>
+          <a href="/find-classes" class="text-neutral-500 hover:text-cream no-underline transition-colors">Find Classes</a>
+        </div>
       </div>
     </footer>
+
+    <script>
+      const nav = document.getElementById("nav");
+      if (nav) {
+        const update = () => {
+          nav.classList.toggle("bg-neutral-950", window.scrollY > 60);
+          nav.classList.toggle("bg-transparent", window.scrollY <= 60);
+        };
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+      }
+
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const closeMenu = () => {
+        mobileMenu?.classList.add("opacity-0", "pointer-events-none");
+        mobileMenu?.classList.remove("opacity-100");
+        document.body.style.overflow = "";
+      };
+      menuBtn?.addEventListener("click", () => {
+        const open = mobileMenu?.classList.contains("opacity-100");
+        if (open) {
+          closeMenu();
+        } else {
+          mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
+          mobileMenu?.classList.add("opacity-100");
+          document.body.style.overflow = "hidden";
+        }
+      });
+      document.querySelectorAll<HTMLAnchorElement>("[data-close-menu]").forEach((a) =>
+        a.addEventListener("click", closeMenu),
+      );
+    </script>
   </body>
 </html>

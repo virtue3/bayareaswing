@@ -5,7 +5,6 @@ const lessons = defineCollection({
   loader: glob({ pattern: "**/*.yaml", base: "./src/content/lessons" }),
   schema: z.object({
     name: z.string(),
-    style: z.enum(["balboa", "lindy", "shag"]),
     day: z.enum([
       "monday",
       "tuesday",
@@ -15,15 +14,23 @@ const lessons = defineCollection({
       "saturday",
       "sunday",
     ]),
-    time: z.string(),
-    venue: z.string(),
-    address: z.string(),
-    neighborhood: z.string().optional(),
-    level: z.enum(["beginner", "intermediate", "advanced", "all-levels"]),
-    instructor: z.string().optional(),
-    cost: z.string().optional(),
-    contact: z.string().url().optional(),
-    notes: z.string().optional(),
+    location: z.string(),
+    addressLine1: z.string().optional(),
+    addressLine2: z.string().optional(),
+    url: z.string().url(),
+    styles: z.array(z.enum(["lindy", "balboa", "shag"])).default([]),
+    description: z.string().optional(),
+    links: z
+      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .default([]),
+    schedule: z
+      .array(z.object({ time: z.string(), desc: z.string() }))
+      .default([]),
+    scheduleNote: z.string().optional(),
+    cost: z
+      .array(z.object({ label: z.string(), value: z.string() }))
+      .default([]),
+    costNote: z.string().optional(),
   }),
 });
 

@@ -1,6 +1,6 @@
 # bayareaswing
 
-A static site that helps newcomers find swing dance lessons and socials in the SF Bay Area — covering balboa, lindy hop, and collegiate shag.
+A static site that helps newcomers find swing dance classes and socials in the SF Bay Area — covering Lindy Hop, Balboa, and Collegiate Shag.
 
 Built with [Astro](https://astro.build/) and [Tailwind CSS v4](https://tailwindcss.com/), deployed to GitHub Pages at **bayareaswing.com**.
 
@@ -8,25 +8,42 @@ Built with [Astro](https://astro.build/) and [Tailwind CSS v4](https://tailwindc
 
 ```
 src/
-  content/lessons/    # one YAML file per recurring lesson
-  content.config.ts   # Zod schema for lessons
-  pages/              # /, /learn, /contribute
-  layouts/
-  components/
-  styles/global.css   # Tailwind v4 + vintage design tokens
-public/CNAME          # custom domain pointer for GitHub Pages
-.github/workflows/    # GitHub Actions deploy workflow
+  content/lessons/       # one YAML file per weekly venue / dance night
+  content.config.ts      # Zod schema for venues
+  pages/
+    index.astro          # /
+    the-dances.astro     # /the-dances
+    find-classes.astro   # /find-classes
+  layouts/BaseLayout.astro
+  styles/global.css      # Tailwind v4 + dark jazz-poster tokens
+public/CNAME             # custom domain pointer for GitHub Pages
+.github/workflows/       # GitHub Actions deploy workflow
 ```
 
-## Adding a lesson
+## Adding or editing a venue
 
-The friendliest path is the in-site guide at **/contribute**. The short version:
+Each weekly dance night is one YAML file in `src/content/lessons/`. Open an existing file (e.g. `tuesday-woodchoppers-ball.yaml`) for the full shape — the short version:
 
-1. Create a new file in `src/content/lessons/` named like `monday-balboa-verdi-club.yaml`.
-2. Fill in the schema (see the template on `/contribute` or any existing file).
-3. Open a pull request. Once merged, the site rebuilds automatically.
+```yaml
+name: "Venue Name"
+day: tuesday              # monday … sunday (lowercase)
+location: "Short location for home page card"
+addressLine1: "Venue · 123 Main St"   # optional, find-classes detail
+addressLine2: "Neighborhood, City"    # optional
+url: "https://venue.example.com/"
+styles: [lindy, balboa]   # subset of: lindy | balboa | shag
+description: "One- or two-sentence venue blurb."
+links:                    # optional: register, directions, etc.
+  - { label: "Register for classes", url: "https://..." }
+schedule:                 # optional: ordered rows
+  - { time: "9:00–9:30 pm", desc: "Beginner drop-in lesson" }
+scheduleNote: "See website for exact times"   # optional
+cost:
+  - { label: "Admission", value: "$15" }
+costNote: "See website for current admission" # used when cost is empty
+```
 
-You don't need to clone the repo — GitHub's web editor and the "Propose changes" / "Create pull request" buttons are enough.
+Submit changes via a pull request — once merged, the site rebuilds automatically.
 
 ## Local development
 
@@ -45,4 +62,4 @@ Pushes to `main` trigger `.github/workflows/deploy.yml`, which builds with Astro
 
 ## Design
 
-Intentionally vintage — cream / burgundy / brass palette, Playfair Display for headings, Inter for body. Evokes the 1930s/40s ballroom era without leaning on kitsch. See `src/styles/global.css` for the design tokens.
+Dark jazz-poster aesthetic — ink-black background (`neutral-950`), cream text (`#f2ead8`), with a single hot red accent (`#c8422a`). System font stack, no display faces. Design tokens live in `src/styles/global.css`.

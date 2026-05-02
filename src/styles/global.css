@@ -1,48 +1,20 @@
 @import "tailwindcss";
-@import "@fontsource/playfair-display/400.css";
-@import "@fontsource/playfair-display/700.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
 
 @theme {
-  --color-cream: #f4ede0;
-  --color-cream-dark: #ebe1cd;
-  --color-burgundy: #7a2e2e;
-  --color-burgundy-dark: #5a2020;
-  --color-brass: #b8893e;
-  --color-brass-dark: #8f6a2e;
-  --color-charcoal: #2a2622;
-  --color-ink: #1a1714;
+  --color-cream: #f2ead8;
+  --color-cream-dim: #a89f8c;
+  --color-red: #c8422a;
 
-  --font-display: "Playfair Display", "Georgia", serif;
-  --font-sans: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
-  background-color: var(--color-cream);
-  color: var(--color-charcoal);
+  background-color: #0a0a0a;
+  color: var(--color-cream);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   min-height: 100vh;
-}
-
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  color: var(--color-ink);
-  letter-spacing: -0.01em;
-}
-
-a {
-  color: var(--color-burgundy);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-a:hover {
-  color: var(--color-brass-dark);
 }

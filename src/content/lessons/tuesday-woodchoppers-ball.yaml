@@ -1,0 +1,29 @@
+name: "Woodchopper's Ball"
+day: tuesday
+location: "Verdi Club · Potrero Hill, SF"
+addressLine1: "Verdi Club · 2424 Mariposa St"
+addressLine2: "Potrero Hill, San Francisco"
+url: "https://www.woodchoppersball.com/"
+styles: [lindy, balboa]
+description: "Live music every week. SF's longest-running Tuesday swing night at the historic Verdi Club in Potrero Hill."
+links:
+  - label: "Register for classes"
+    url: "https://www.woodchoppersball.com/class-schedule-registration/"
+  - label: "Directions & parking"
+    url: "https://www.woodchoppersball.com/venue/"
+schedule:
+  - time: "7:00–9:00 pm"
+    desc: "Monthly classes — Lindy Hop & Balboa (beginning & intermediate)"
+  - time: "8:00 pm"
+    desc: "Full bar & lounge opens (21+ only)"
+  - time: "9:00–9:15 pm"
+    desc: "Drop-in basic swing lesson (no sign-up)"
+  - time: "9:00–11:30 pm"
+    desc: "Live music dance party"
+cost:
+  - label: "Dance party"
+    value: "$20 general · $10 students (w/ ID)"
+  - label: "Payment"
+    value: "Cash only"
+  - label: "Monthly classes"
+    value: "See website for current pricing"
