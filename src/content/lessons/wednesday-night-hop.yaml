@@ -2,7 +2,7 @@ name: "Wednesday Night Hop"
 day: wednesday
 location: "Palo Alto · South Bay"
 url: "https://wednesdaynighthop.com/"
-styles: [lindy]
+styles: [lindy, balboa, shag]
 description: "The South Bay's weekly swing night, bringing Lindy Hop to the Peninsula every Wednesday."
 schedule:
   - time: "Early evening"

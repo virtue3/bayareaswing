@@ -4,7 +4,7 @@ location: "435 Broadway · North Beach, SF"
 addressLine1: "Mabuhay Gardens · 435 Broadway St"
 addressLine2: "North Beach, San Francisco"
 url: "https://www.catscornersf.com/"
-styles: [lindy]
+styles: [lindy, balboa, shag]
 description: "Two rooms of classes, rotating live bands, and a full bar. SF's iconic Wednesday night swing party in a historic North Beach venue."
 links:
   - label: "Register for classes"

@@ -1,0 +1,13 @@
+name: "Lindy in the Park"
+day: sunday
+location: "Golden Gate Park - SF"
+url: "https://lindyinthepark.com/"
+styles: [lindy, balboa, shag]
+description: "Lindy in the Park is free social swing dancing every Sunday (weather permitting, of course) from 11:00 AM – 2:00 PM."
+schedule:
+  - time: "12:00 PM - 12:30 PM"
+    desc: "FREE beginner lesson!"
+  - time: "11:00 AM - 2:00 PM"
+    desc: "Social dancing"
+scheduleNote: "Weather permitting"
+costNote: "Free"
