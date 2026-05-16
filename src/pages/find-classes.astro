@@ -22,10 +22,9 @@ const styleLabel: Record<"lindy" | "balboa" | "shag", string> = {
 };
 
 const venues = (await getCollection("lessons"))
-  .map((entry) => entry.data)
-  .sort((a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day));
+  .sort((a, b) => dayOrder.indexOf(a.data.day) - dayOrder.indexOf(b.data.day));
 
-const presentDays = Array.from(new Set(venues.map((v) => v.day)));
+const presentDays = Array.from(new Set(venues.map((v) => v.data.day)));
 
 const tips = [
   {
@@ -72,8 +71,8 @@ const tips = [
   </div>
 
   <div id="venueList" class="px-6 md:px-12 max-w-5xl mx-auto divide-y divide-neutral-800">
-    {venues.map((v) => (
-      <article class="venue-card py-12" data-day={v.day}>
+    {venues.map(({ id, data: v }) => (
+      <article id={id} class="venue-card py-12 scroll-mt-24" data-day={v.day}>
         <div class="grid md:grid-cols-3 gap-8 md:gap-12">
           <div>
             <p class="text-red text-xs tracking-widest uppercase mb-2">{dayLabel(v.day)}</p>

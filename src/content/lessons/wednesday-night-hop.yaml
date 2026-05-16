@@ -1,6 +1,7 @@
 name: "Wednesday Night Hop"
 day: wednesday
 location: "Palo Alto · South Bay"
+addressLine1: "625 Hamilton Ave, Palo Alto, CA 94301"
 url: "https://wednesdaynighthop.com/"
 styles: [lindy, balboa, shag]
 description: "The South Bay's weekly swing night, bringing Lindy Hop to the Peninsula every Wednesday."
